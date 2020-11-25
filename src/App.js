@@ -1,23 +1,25 @@
 import logo from './logo.svg';
+import etsy from './data/etsy';
+import Listing from './components/Listing/Listing';
+
 import './App.css';
 
 function App() {
+  let data = etsy.map(item => {
+    return {
+      listing_id : item.listing_id,
+      url : item.url,
+      image_url : item.MainImage ? item.MainImage.url_570xN: '',
+      title : item.title,
+      currency_code : item.currency_code,
+      price : item.price,
+      quantity : item.quantity,
+    }
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Listing items={data}/>
     </div>
   );
 }
