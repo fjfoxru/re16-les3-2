@@ -9,7 +9,7 @@ function App() {
     return {
       listing_id : item.listing_id,
       url : item.url,
-      image_url : item.MainImage ? item.MainImage.url_570xN: '',
+      image_url : item.MainImage ? item.MainImage.url_570xN: null,
       title : item.title,
       currency_code : item.currency_code,
       price : item.price,

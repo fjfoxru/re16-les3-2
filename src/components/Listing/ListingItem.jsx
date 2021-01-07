@@ -1,38 +1,44 @@
 import PropTypes from 'prop-types';
 
+const getQualityLevel = (quantity) => {
+if (quantity < 11) {
+    return 'low'
+} else if (quantity < 21) {
+    return 'medium'
+} else {
+    return 'high'
+}
+}
+
+const getCurrency = (currencyCode) => {
+    if (currencyCode === 'USD') {
+        return '$';
+    } else if (currencyCode === 'EUR') {
+        return '€';
+    } else {
+        return '';
+    }
+} 
+
+const getTitle = (title) => {
+    if (title && title.length > 50) {
+        return title.substring(0,50) + '...';
+    } else {
+        return '';
+    }
+}
+
 function ListingItem (props) {
+    const currencyCode = getCurrency(props.item.currency_code);
+    const quantityLevel = getQualityLevel(props.item.quantity);
+    const title = getTitle(props.item.title);
 
-    let quantityLevel;
-    if (props.item.quantity < 11) {
-        quantityLevel = 'low'
-    } else if (props.item.quantity < 21) {
-        quantityLevel = 'medium'
-    } else {
-        quantityLevel = 'high'
-    }
-
-    let currencyCode;
-    if (props.item.currency_code === 'USD') {
-        currencyCode = '$';
-    } else if (props.item.currency_code === 'EUR') {
-        currencyCode = '€';
-    } else {
-        currencyCode = '';
-    }
-
-
-    let title;
-    if (props.item.title && props.item.title.length > 50) {
-        title = props.item.title.substring(0,50) + '...';
-    } else {
-        title = '';
-    }
 
     return (
     <div className="item">
         <div className="item-image">
             <a href={props.item.url}>
-                <img src={props.item.image_url} alt={props.item.title} />
+                {image_url && <img src={props.item.image_url} alt={props.item.title} />}
             </a>
         </div>
         <div className="item-details">
